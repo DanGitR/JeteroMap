@@ -11,9 +11,16 @@ library(leaflet)
 ```
 
 ```{r icon, eval=TRUE}
+
 jeteroIcon <- makeIcon(
   iconUrl = "http://www.jetero.com/images/general/JeteroLogo_small.jpg",
   iconWidth = 60*215/230, iconHeight = 60,
+  iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+  
+  weather1Icon <- makeIcon(
+  iconUrl = "https://raw.githubusercontent.com/manifestinteractive/weather-underground-icons/HEAD/dist/icons/black/png/256x256/tstorms.png",
+  iconWidth = 40*215/230, iconHeight = 40,
   iconAnchorX = 31*215/230/2, iconAnchorY = 16
 )
 ```
@@ -21,6 +28,9 @@ jeteroIcon <- makeIcon(
 ```{r site, eval=TRUE}
 jeteroSite <- c(
   "<a href='http://www.jetero.com/index.html'>Jetero Website</a>"
+)  
+  weatherSite1 <- c(
+  "<a href='https://www.wunderground.com/personal-weather-station/dashboard?ID=KTXDAYTO35'>Weather 1</a>"
 )
 ```
 
@@ -69,6 +79,9 @@ fieldMap <- leaflet() %>%
         addMarkers (lat=30.061658, lng=-95.020989,
                     popup=jeteroSite,
                     icon = jeteroIcon) %>%  
+        addMarkers (lat=30.06205, lng=-95.020989,
+                    popup=weatherSite1,
+                    icon = weather1Icon) %>%  
         
         addPolygons(lng=jeteroRunwayLng,lat = jeteroRunwayLat , weight = 2, fillColor = "black", fillOpacity=1,color="black", opacity = 1) %>%
         addPolylines(lng=centerlineLng, lat=centerlineLat, color="white",opacity = 1,dashArray = "4", weight=3,
