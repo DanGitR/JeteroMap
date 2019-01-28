@@ -1,0 +1,85 @@
+---
+title: "Jetero RC Field Interactive Map"
+author: ""
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(leaflet)
+```
+
+```{r icon, eval=TRUE}
+jeteroIcon <- makeIcon(
+  iconUrl = "http://www.jetero.com/images/general/JeteroLogo_small.jpg",
+  iconWidth = 60*215/230, iconHeight = 60,
+  iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+```
+
+```{r site, eval=TRUE}
+jeteroSite <- c(
+  "<a href='http://www.jetero.com/index.html'>Jetero Website</a>"
+)
+```
+
+```{r runway, eval=TRUE}
+jeteroRunwayLng <- c(-95.020785,
+        -95.020571,
+         -95.019860,
+        -95.020095
+        
+)
+
+jeteroRunwayLat <- c(30.062355,
+        30.062416, 
+        30.061050,
+        30.060951
+)
+
+centerlineLng <-c(mean(jeteroRunwayLng[1:2]),mean(jeteroRunwayLng[3:4]))
+centerlineLat <-c(mean(jeteroRunwayLat[1:2]),mean(jeteroRunwayLat[3:4]))       
+
+  
+```
+
+
+```{r overfly, eval=TRUE}
+jeteroFlyLng <- c(-95.021150,
+        -95.017112,
+         -95.017112,
+        -95.019150
+        
+)
+
+jeteroFlyLat <- c(30.063551,
+        30.063551, 
+        30.059748,
+        30.059748
+)
+
+  
+```
+
+```{r map, eval=TRUE}
+
+fieldMap <- leaflet() %>% 
+        addTiles() %>%
+        addMarkers (lat=30.061658, lng=-95.020989,
+                    popup=jeteroSite,
+                    icon = jeteroIcon) %>%  
+        
+        addPolygons(lng=jeteroRunwayLng,lat = jeteroRunwayLat , weight = 2, fillColor = "black", fillOpacity=1,color="black", opacity = 1) %>%
+        addPolylines(lng=centerlineLng, lat=centerlineLat, color="white",opacity = 1,dashArray = "4", weight=3,
+                     popup="Runway", popupOptions(keepInView = TRUE)) %>%
+        addPolygons(lng=jeteroFlyLng,lat = jeteroFlyLat , weight = 2, fillColor = "green", color="red",popup = "Flyover Area", popupOptions(keepInView = TRUE)) %>%
+addLabelOnlyMarkers(lng=centerlineLng,lat=centerlineLat,label=c("34","16"), labelOptions=labelOptions(noHide = T, textOnly = F, direction="center",style=list("color"="black","font-size"="10px")))
+
+#addPolylines()
+
+fieldMap
+
+```
+
+
