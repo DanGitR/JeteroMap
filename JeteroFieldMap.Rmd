@@ -30,7 +30,7 @@ jeteroSite <- c(
   "<a href='http://www.jetero.com/index.html'>Jetero Website</a>"
 )  
   weatherSite1 <- c(
-  "<a href='https://www.wunderground.com/personal-weather-station/dashboard?ID=KTXDAYTO35'>Weather 1</a>"
+  "<a href='https://www.wunderground.com/personal-weather-station/dashboard?ID=KTXDAYTO35'>Field Weather</a>"
 )
 ```
 
@@ -87,7 +87,7 @@ fieldMap <- leaflet() %>%
         addPolylines(lng=centerlineLng, lat=centerlineLat, color="white",opacity = 1,dashArray = "4", weight=3,
                      popup="Runway", popupOptions(keepInView = TRUE)) %>%
         addPolygons(lng=jeteroFlyLng,lat = jeteroFlyLat , weight = 2, fillColor = "green", color="red",popup = "Flyover Area", popupOptions(keepInView = TRUE)) %>%
-addLabelOnlyMarkers(lng=centerlineLng,lat=centerlineLat,label=c("34","16"), labelOptions=labelOptions(noHide = T, textOnly = F, direction="center",style=list("color"="black","font-size"="10px")))
+addLabelOnlyMarkers(lng=centerlineLng,lat=centerlineLat,label=c("16","34"), labelOptions=labelOptions(noHide = T, textOnly = F, direction="center",style=list("color"="black","font-size"="10px")))
 
 #addPolylines()
 
